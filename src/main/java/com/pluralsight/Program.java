@@ -16,17 +16,50 @@ public class Program {
         Deck deck = new Deck();
         deck.shuffle();
 
-        for (Player player : players) {
-            Card card = deck.deal();
-            card.flip();
-            player.getHand().deal(card);
+        for (int round = 0; round < 2; round ++) {
+            for (Player player : players) {
+                Card card = deck.deal();
+                player.getHand().deal(card);
+            }
         }
 
         System.out.println();
         for (Player player: players) {
             int value = player.getHand().getValue();
-            String line = player.getName() + ": " + player.getHand() + " (" + value + " )";
+            String line = player.getName() + ": " + player.getHand() + " (" + value + ") ";
             System.out.println(line);
+        }
+
+        ArrayList<Player> winners = new ArrayList<>();
+        int bestScore = 0;
+        for (Player player: players) {
+            int value = player.getHand().getValue();
+            if (value > 21) {
+                continue;
+            }
+            if (value > bestScore) {
+                bestScore = value;
+                winners.clear();
+                winners.add(player);
+            } else if (value == bestScore) {
+                winners.add(player);
+            }
+        }
+
+        System.out.println();
+        if (winners.isEmpty()) {
+            System.out.println("Everyone went over 21. No winners!");
+        } else if (winners.size() == 1) {
+            System.out.println(winners.get(0).getName() + " wins with " + bestScore + "!");
+        } else {
+            String names = "";
+            for (int i = 0; i < winners.size(); i++) {
+                if (i > 0) {
+                    names += " and ";
+                }
+                names += winners.get(i).getName();
+            }
+            System.out.println("It's a tie between " + names + " with " + bestScore + "!");
         }
 
     }
@@ -42,6 +75,4 @@ public class Program {
             System.out.println("This name can't be blank");
         }
     }
-
-
 }
