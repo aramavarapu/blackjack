@@ -22,7 +22,15 @@ public class Program {
             player.getHand().deal(card);
         }
 
+        System.out.println();
+        for (Player player: players) {
+            int value = player.getHand().getValue();
+            String line = player.getName() + ": " + player.getHand() + " (" + value + " )";
+            System.out.println(line);
+        }
+
     }
+
 
     private static String askForName(Scanner scanner, int playerNumber) {
         while (true) {
