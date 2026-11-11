@@ -1,8 +1,28 @@
 package com.pluralsight;
-
+import java.util.ArrayList;
+import java.util.Scanner;
 public class Program {
+
+    private static final int NUMBER_OF_PLAYERS = 2;
+
     public static void main(String[] args) {
-        Deck deck = new Deck();
-        System.out.println(deck.getSize());
+        Scanner scanner = new Scanner(System.in);
+
+        ArrayList<Player> players = new ArrayList<>();
+        for (int i = 1; i <= NUMBER_OF_PLAYERS; i++) {
+            players.add(new Player(askForName(scanner, i), new Hand()));
+        }
     }
+
+    private static String askForName(Scanner scanner, int playerNumber) {
+        while (true) {
+            System.out.print("Enter the name of player " + playerNumber + ": ");
+            String name = scanner.nextLine().trim();
+            if (!name.isEmpty()) {
+                return name;
+            }
+            System.out.println("This name can't be blank");
+        }
+    }
+
 }
