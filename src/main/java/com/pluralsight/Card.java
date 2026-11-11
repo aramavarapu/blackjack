@@ -51,4 +51,9 @@ public class Card {
     public void flip() {
         faceUp = !faceUp;
     }
+
+    @Override
+    public String toString() {
+        return value + " of " + suit;
+    }
 }

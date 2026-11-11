@@ -32,4 +32,9 @@ public class Hand {
 
         return value;
     }
+
+    @Override
+    public String toString() {
+        return cards.toString();
+    }
 }
