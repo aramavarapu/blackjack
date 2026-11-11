@@ -12,6 +12,16 @@ public class Program {
         for (int i = 1; i <= NUMBER_OF_PLAYERS; i++) {
             players.add(new Player(askForName(scanner, i), new Hand()));
         }
+
+        Deck deck = new Deck();
+        deck.shuffle();
+
+        for (Player player : players) {
+            Card card = deck.deal();
+            card.flip();
+            player.getHand().deal(card);
+        }
+
     }
 
     private static String askForName(Scanner scanner, int playerNumber) {
@@ -24,5 +34,6 @@ public class Program {
             System.out.println("This name can't be blank");
         }
     }
+
 
 }
